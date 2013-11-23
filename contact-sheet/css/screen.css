@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body p {
+  width: 120px;
+  float: left;
+  height: 120px;
+  text-align: center;
+}
+body p .pic {
+  width: 100%;
+}
+body p .code {
+  margin-top: -20px;
+}
