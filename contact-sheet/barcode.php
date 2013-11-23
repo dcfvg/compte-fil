@@ -87,9 +87,9 @@
 
 	if ( strtolower($orientation) == "horizontal" ) {
 		$img_width = $code_length;
-		$img_height = $size*2;
+		$img_height = $size*1.7;
 	} else {
-		$img_width = $size*2;
+		$img_width = $size*1.7;
 		$img_height = $code_length;
 	}
 
@@ -114,7 +114,7 @@
 	//imagepng($image);
 	//imagedestroy($image);
   
-  imagestring($image, 2, 10, $size, $code_type."-".$text, $black);
+  imagestring($image, 1, 10, $size, $text, $black);
 
   // Content type
   header('Content-Type: image/gif');
