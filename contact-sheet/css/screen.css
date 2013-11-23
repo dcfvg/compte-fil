@@ -5,12 +5,17 @@
 body p {
   width: 120px;
   float: left;
-  height: 120px;
+  height: 150px;
   text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 body p .pic {
   width: 100%;
 }
 body p .code {
-  margin-top: -20px;
+  margin-top: 95px;
+  padding: 0 8px 0 8px;
+  background: white;
 }
