@@ -100,6 +100,10 @@ function get_id($id,$cache_path){
   //krumo($ids);
   return $ids[$id];
 }
-
+function str_sort($string){
+  $stringParts = str_split($string);
+  sort($stringParts);
+  return implode('', $stringParts);
+}
 
 ?>
