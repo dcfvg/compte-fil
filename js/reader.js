@@ -1,19 +1,20 @@
 $(function() {
   var vid_h=1080,vid_w=1920;
-
+  
   // events
-  $( "html" ).keypress(function(event) {
-    console.log(event.which);
-    
-    if ( event.which == 103 ) thumbMode();      // g
-    if ( event.which == 99 )  toogle_camode();  // c
-    if ( event.which == 115 ) take_snapshot();  // s
-    
-  });
+
   $( "#searchForm" ).submit(function( event ) {
     event.preventDefault();
     get_media($( this ));
+    
   });
+  
+  // short cut
+  $( "html" ).keypress(function(event) {$("#code_input").focus();});
+  
+  $("#code_input").bind('keydown.Alt_g', thumbMode);
+  $("#code_input").bind('keydown.Alt_c', toogle_camera);
+  $("#code_input").bind('keydown.Alt_s', take_snapshot);
   
   // functions
   function scanmode(){
@@ -24,6 +25,8 @@ $(function() {
   function thumbMode(){
     // fs images to tumbnails
     $( "body" ).toggleClass( "mini" );
+    $( "#my_camera" ).removeClass( "on" );
+    scanmode();
   }
   function get_media($form){
     
@@ -36,12 +39,13 @@ $(function() {
     var posting = $.post( url, { s: term } );
     
     posting.done(function( data ) {
-      $( "#result" ).prepend( data );
+      if(data != "none"){
+        $( "#result" ).prepend( data );
+      }
       scanmode();
     });
   }
   function init_camera(){
-    
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 		
 		window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
@@ -61,8 +65,9 @@ $(function() {
 			alert("getUserMedia not supported on your machine!");
 		}
   }
-  function toogle_camode(){
+  function toogle_camera(){
     $( "#my_camera" ).toggleClass( "on" );
+    scanmode();
   }
   function take_snapshot(){
 		// take snapshot and get image data
@@ -81,6 +86,7 @@ $(function() {
 		
 		// display results in page
 		$( "#result" ).prepend('<li class="slide" style="background-image:url('+data_uri+');"></li>');
+		scanmode();
 	}
   
   function show_clock(context,x,y){
@@ -105,7 +111,6 @@ $(function() {
       var pad = new Array(1 + p).join(pad_char);
       return (pad + n).slice(-pad.length);
   }
-  
   scanmode();
   init_camera();
 })
