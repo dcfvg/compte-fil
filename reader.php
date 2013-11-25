@@ -8,7 +8,7 @@
   <body>
   	  	
 
-    <ol id="result" reversed="reversed"></ul>
+    <ol id="result" reversed="reversed"></ol>
     
     <video id="my_camera" autoplay="autoplay"></video>
     <form action="call.php" method="post" id="searchForm">
