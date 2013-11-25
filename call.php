@@ -5,8 +5,9 @@ date_default_timezone_set('Europe/Paris');
 $path =  "assets/sets/";
 $f_sets =  list_files($path);    
 
-$img = $f_sets[0][$_POST["s"]-1];
+$f = $f_sets[0][$_POST["code"]-1];
 
-if($img == "") echo 'none';
-else echo '<li class="slide" style="background-image:url('.$img.');">'.date('h:i:s').'</li>';
+if($f == "") echo 'none';
+else echo $f;
+
 ?>

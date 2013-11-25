@@ -1,20 +1,31 @@
 $(function() {
-  var vid_h=1080,vid_w=1920;
   
-  // events
+  // vars
+  var vid_h=1080,vid_w=1920,
+  $video = $( "#my_camera" ),
+  $form = $( "#searchForm" ),
+  ajax_url = $form.attr( "action" );
 
-  $( "#searchForm" ).submit(function( event ) {
+  // events
+  $form.submit(function( event ) {
     event.preventDefault();
-    get_media($( this ));
-    
+    get_reader_entry();
+    scanmode();
   });
-  
-  // short cut
   $( "html" ).keypress(function(event) {$("#code_input").focus();});
   
-  $("#code_input").bind('keydown.Alt_g', thumbMode);
-  $("#code_input").bind('keydown.Alt_c', toogle_camera);
-  $("#code_input").bind('keydown.Alt_s', take_snapshot);
+  // short cut
+  function shortcut(code){
+        
+    console.log("shortcut :: "+code);
+    
+    switch (code){
+      case "c": toogle_camera();            break;
+      case "s": new_slide(snapshot());      break;
+      case "g": gridMode();                 break;
+      default:console.log("shortcut :: no match");
+    }
+  }
   
   // functions
   function scanmode(){
@@ -22,29 +33,37 @@ $(function() {
     $("#code_input").focus();
     $("#code_input").val('');
   }
-  function thumbMode(){
+  function gridMode(){
     // fs images to tumbnails
     $( "body" ).toggleClass( "mini" );
     $( "#my_camera" ).removeClass( "on" );
     scanmode();
   }
-  function get_media($form){
+  
+  // barcode procesing
+  function get_reader_entry(){
     
-    var term = $form.find( "input[name='s']" ).val(),
-    url = $form.attr( "action" );
+    var code = $form.find( "input[name='s']" ).val();
+    console.log('scanned code :: '+code);
     
-    console.log('scanned_id :: '+term);
-    $(document).attr('title',term ); 
-    
-    var posting = $.post( url, { s: term } );
+    if(code.length < 2) shortcut(code);
+    else get_file(code);
+     
+  }
+  function get_file(code){
+    var file, posting = $.post(ajax_url, { code: code } );
     
     posting.done(function( data ) {
-      if(data != "none"){
-        $( "#result" ).prepend( data );
-      }
-      scanmode();
+      new_slide(data); // TODO : return only data the create slide
     });
   }
+  function new_slide(content,type){
+    if(content != "") {
+      $( "#result" ).prepend('<li class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');
+    }
+  }
+    
+  // video captures
   function init_camera(){
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 		
@@ -67,30 +86,24 @@ $(function() {
   }
   function toogle_camera(){
     $( "#my_camera" ).toggleClass( "on" );
-    scanmode();
   }
-  function take_snapshot(){
+  function snapshot(){
 		// take snapshot and get image data
-		var video = document.getElementById('my_camera');
 		
 		var canvas = document.createElement('canvas');
+		var video = document.getElementById('my_camera');
+		
 		canvas.width = vid_w;
 		canvas.height = vid_h;
+
 		var context = canvas.getContext('2d');
 		
 		context.drawImage(video, 0, 0, vid_w, vid_h);
-		
     show_clock(context);
 		
-		var data_uri = canvas.toDataURL('image/jpeg', 1.0 );
-		
-		// display results in page
-		$( "#result" ).prepend('<li class="slide" style="background-image:url('+data_uri+');"></li>');
-		scanmode();
+		return canvas.toDataURL('image/jpeg', 1.0 );
 	}
-  
   function show_clock(context,x,y){
-    
     var x = typeof x !== 'undefined' ? x : '100';
     var y = typeof y !== 'undefined' ? y : '100';
     
@@ -100,17 +113,21 @@ $(function() {
   }
   
   // utils
-  
-  function get_time(){ 
+  function get_time(){
     var date=new Date();
 		return str_pad(date.getHours(),2)+":"+str_pad(date.getMinutes(),2)+":"+str_pad(date.getSeconds(),2);
   }
-  
   function str_pad(n, p, c) {
-      var pad_char = typeof c !== 'undefined' ? c : '0';
-      var pad = new Array(1 + p).join(pad_char);
-      return (pad + n).slice(-pad.length);
+    var pad_char = typeof c !== 'undefined' ? c : '0';
+    var pad = new Array(1 + p).join(pad_char);
+    return (pad + n).slice(-pad.length);
   }
-  scanmode();
-  init_camera();
+  
+  // init
+  function init(){
+    // init_camera();
+    scanmode();
+  }
+  
+  init();
 })
