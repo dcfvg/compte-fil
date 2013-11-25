@@ -25,4 +25,4 @@
 *.tmproj
 
 assets/
-/krumo
+krumo/
