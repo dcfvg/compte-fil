@@ -2,7 +2,7 @@
 include 'krumo/class.krumo.php'; // debug only
 include "../functions.php";
 
-$sets_path      = "../".$GLOBALS['sets_path'];
+$sets_path      = "..".$GLOBALS['sets_path'];
 $id_cache_path  = "../".$GLOBALS['id_cache_path'];
 $set_id         = 0;
 $start          = 100;
