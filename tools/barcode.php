@@ -10,12 +10,20 @@
  */
 	
 	// Get pararameters that are passed in through $_GET or set to the default value
-	$text = (isset($_GET["text"])?$_GET["text"]:"0");
+	$text = (isset($_GET["code"])?$_GET["code"]:"0");
 	$size = (isset($_GET["size"])?$_GET["size"]:"20");
 	$orientation = (isset($_GET["orientation"])?$_GET["orientation"]:"horizontal");
 	$code_type = (isset($_GET["codetype"])?$_GET["codetype"]:"code128");
 	$percent = (isset($_GET["percent"])?$_GET["percent"]:"1");
 	$code_string = "";
+	
+	$human_version = (isset($_GET["human_version"])?$_GET["human_version"]:false);
+  
+  if($human_version){
+    $margin_coef = 1.7;
+  } else {
+    $margin_coef = 1;
+  }
 
 	// Translate the $text into barcode the correct $code_type
 	if ( strtolower($code_type) == "code128" ) {
@@ -87,26 +95,25 @@
 
 	if ( strtolower($orientation) == "horizontal" ) {
 		$img_width = $code_length;
-		$img_height = $size*1.7;
+		$img_height = $size*$margin_coef;
 	} else {
-		$img_width = $size*1.7;
+		$img_width = $size*$margin_coef;
 		$img_height = $code_length;
 	}
 
-	$image = imagecreate($img_width, $img_height);
+	$image = imagecreate ($img_width, $img_height);
 	$black = imagecolorallocate ($image, 0, 0, 0);
 	$white = imagecolorallocate ($image, 255, 255, 255);
-  $yellow = imagecolorallocate ($image, 255, 255, 255);
 	
-	imagefill( $image, 0, 0, $yellow );
+	imagefill( $image, 0, 0, $white );
 
 	$location = 10;
 	for ( $position = 1 ; $position <= strlen($code_string); $position++ ) {
 		$cur_size = $location + ( substr($code_string, ($position-1), 1) );
 		if ( strtolower($orientation) == "horizontal" )
-			imagefilledrectangle( $image, $location, 0, $cur_size, $img_height/2, ($position % 2 == 0 ? $white : $black) );
+			imagefilledrectangle( $image, $location, 0, $cur_size, $img_height, ($position % 2 == 0 ? $white : $black) );
 		else
-			imagefilledrectangle( $image, 0, $location, $img_width/2, $cur_size, ($position % 2 == 0 ? $white : $black) );
+			imagefilledrectangle( $image, 0, $location, $img_width, $cur_size, ($position % 2 == 0 ? $white : $black) );
 		$location = $cur_size;
 	}
 	// Draw barcode to the screen
@@ -114,22 +121,25 @@
 	//imagepng($image);
 	//imagedestroy($image);
   
+  if($human_version){
+    imagefilledrectangle($image, 0,$img_width/$margin_coef, $img_width, $img_height, $white);
+  }
   imagestring($image, 1, 10, $size, $text, $black);
 
   // Content type
   header('Content-Type: image/gif');
 
   // Calcul des nouvelles dimensions
-  $newwidth = $img_width * $percent;
-  $newheight = $img_height * $percent;
+  //$newwidth = $img_width * $percent;
+  //$newheight = $img_height * $percent;
 
   // Chargement
-  $thumb = imagecreate($newwidth, $newheight);
-  $source = $image;
+  //$thumb = imagecreate($newwidth, $newheight);
+  //$source = $image;
 
   // Redimensionnement
-  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $img_width, $img_height);
+  //imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $img_width, $img_height);
 
   // Affichage
-  imagegif($thumb);
+  imagegif($image);
 ?>
