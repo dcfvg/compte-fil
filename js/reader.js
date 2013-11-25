@@ -61,6 +61,8 @@ $(function() {
 		context.drawImage(video, 0, 0, vid_w, vid_h);
     show_clock(context);
 		
+		$( "#my_camera" ).removeClass( "on" );
+    
 		return canvas.toDataURL('image/jpeg', 1.0 );
 	}
   function show_clock(context,x,y){
@@ -77,7 +79,7 @@ $(function() {
         
     console.log("shortcut :: "+code);
     
-    switch (code){
+    switch (code.toLowerCase()){
       case "c": toogle_camera();            break;
       case "s": new_slide(snapshot());      break;
       case "g": gridMode();                 break;
@@ -109,7 +111,7 @@ $(function() {
   
   // init
   function init(){
-    // init_camera();
+    init_camera();
     scanmode();
   }
   
@@ -126,7 +128,6 @@ $(function() {
     scanmode();
   });
   $( "html" ).keypress(function(event) {$("#code_input").focus();});
-  
   
   init();
 })
