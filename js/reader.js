@@ -74,11 +74,37 @@ $(function() {
 		var context = canvas.getContext('2d');
 		
 		context.drawImage(video, 0, 0, vid_w, vid_h);
+		
+    show_clock(context);
+		
 		var data_uri = canvas.toDataURL('image/jpeg', 1.0 );
 		
 		// display results in page
 		$( "#result" ).prepend('<li class="slide" style="background-image:url('+data_uri+');"></li>');
 	}
+  
+  function show_clock(context,x,y){
+    
+    var x = typeof x !== 'undefined' ? x : '100';
+    var y = typeof y !== 'undefined' ? y : '100';
+    
+    context.fillStyle = "white";
+    context.font = "bold 18px Monaco";
+    context.fillText(get_time(), x, y);
+  }
+  
+  // utils
+  
+  function get_time(){ 
+    var date=new Date();
+		return str_pad(date.getHours(),2)+":"+str_pad(date.getMinutes(),2)+":"+str_pad(date.getSeconds(),2);
+  }
+  
+  function str_pad(n, p, c) {
+      var pad_char = typeof c !== 'undefined' ? c : '0';
+      var pad = new Array(1 + p).join(pad_char);
+      return (pad + n).slice(-pad.length);
+  }
   
   scanmode();
   init_camera();

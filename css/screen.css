@@ -21,7 +21,7 @@
 #searchForm {
   position: absolute;
   top: 0;
-  left: -5000px;
+  left: -500px;
 }
 body.mini {
   padding: 10%;
@@ -37,7 +37,7 @@ body.mini #result li {
   display: none;
   position: absolute;
   top: 0;
-  left: -1920;
+  left: 0;
   width: 100%;
   height: 100%;
 }
