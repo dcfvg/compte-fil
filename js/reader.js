@@ -19,7 +19,8 @@ $(function() {
   }
   function new_slide(content,type){
     if(content != "") {
-      $( "#result" ).prepend('<li class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');
+      $( "#my_camera" ).removeClass( "on" );
+      $( "#result" ).prepend('<li class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');      
     }
   }
     
@@ -60,9 +61,7 @@ $(function() {
 		
 		context.drawImage(video, 0, 0, vid_w, vid_h);
     show_clock(context);
-		
-		$( "#my_camera" ).removeClass( "on" );
-    
+		    
 		return canvas.toDataURL('image/jpeg', 1.0 );
 	}
   function show_clock(context,x,y){
@@ -76,13 +75,15 @@ $(function() {
   
   // user interface
   function shortcut(code){
-        
+    
     console.log("shortcut :: "+code);
     
     switch (code.toLowerCase()){
       case "c": toogle_camera();            break;
       case "s": new_slide(snapshot());      break;
       case "g": gridMode();                 break;
+      case "h": stackMode();                break;
+      
       default:console.log("shortcut :: no match");
     }
   }
@@ -97,6 +98,22 @@ $(function() {
     $( "#my_camera" ).removeClass( "on" );
     scanmode();
   }
+  function stackMode(){
+    $( "body" ).toggleClass( "stack" );
+    $( "#my_camera" ).removeClass( "on" );
+    
+    refreshZindex();
+    scanmode();
+  }
+  
+  function refreshZindex(){
+    $("#result li").each(function(n) {
+      var pos = 1 + Math.floor(Math.random() * 10);
+      margin_rand = pos+'% '+pos+'% '+pos+'% '+pos+'%';
+      
+      $(this).css('z-index', 1000-n).css('margin',margin_rand);
+    });
+  }
   
   // utils
   function get_time(){
@@ -108,10 +125,17 @@ $(function() {
     var pad = new Array(1 + p).join(pad_char);
     return (pad + n).slice(-pad.length);
   }
-  
+  function gen_content(){
+    
+    var a = ["AAv", "ABg", "AAE", "AAe", "AAf", "AAF"];
+    a.forEach(function(entry) {get_file(entry);});
+   
+  }
+
   // init
   function init(){
     init_camera();
+    gen_content();
     scanmode();
   }
   
@@ -120,6 +144,7 @@ $(function() {
   $video = $( "#my_camera" ),
   $form = $( "#searchForm" ),
   ajax_url = $form.attr( "action" );
+  mode="normal"
   
   // events
   $form.submit(function( event ) {
@@ -130,4 +155,5 @@ $(function() {
   $( "html" ).keypress(function(event) {$("#code_input").focus();});
   
   init();
+
 })

@@ -12,6 +12,15 @@ body.mini #result li {
   list-style: decimal;
   text-align: center;
 }
+body.stack #result {
+  width: 70%;
+  height: 70%;
+}
+body.stack #result li {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+}
 body #result {
   position: absolute;
   top: 0;
