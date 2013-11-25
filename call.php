@@ -1,13 +1,17 @@
 <?php
 include("functions.php");
+include 'tools/krumo/class.krumo.php';
+
 date_default_timezone_set('Europe/Paris');
 
 $path =  "assets/sets/";
-$f_sets =  list_files($path);    
+$code = str_sort($_POST["code"]);
 
-$f = $f_sets[0][$_POST["code"]-1];
 
-if($f == "") echo 'none';
-else echo $f;
+$fs = glob("$path*/_sd/$code*");
+
+// krumo($fs[0]);
+
+echo $fs[0];
 
 ?>
