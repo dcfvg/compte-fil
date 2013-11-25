@@ -1,9 +1,11 @@
 <?php
-include('krumo/class.krumo.php'); // debug only
-include("../functions.php");
+include 'krumo/class.krumo.php'; // debug only
+include "../functions.php";
 
-$path =  "../assets/sets/";
-$f_sets =  list_files($path);
+$sets_path      = "../".$GLOBALS['sets_path'];
+$id_cache_path  = "../".$GLOBALS['id_cache_path'];
+$set_id         = 0;
+$start          = 100;
 
 ?>
 <!DOCTYPE html>
@@ -15,7 +17,7 @@ $f_sets =  list_files($path);
   </head>
   <body>
   <div class="sheet">
-    <?php echo gen_contact($f_sets,0);  ?>
+    <?php echo gen_contact($sets_path, $id_cache_path, $set_id, $start); ?>
   </div>
   </body>
 </html>
