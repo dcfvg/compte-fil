@@ -16,9 +16,20 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  text-align: center;
 }
 #searchForm {
   position: absolute;
   top: 0;
   left: -200px;
+}
+body.mini {
+  padding: 10%;
+}
+body.mini #result li {
+  width: 25%;
+  height: 25%;
+  float: left;
+  list-style: decimal;
+  text-align: center;
 }

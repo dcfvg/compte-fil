@@ -1,5 +1,16 @@
 $(function() {
-  $("#code_input").focus();
+  
+    $( "body" ).keypress(function(event) {
+      $("#code_input").focus();
+      
+      if ( event.which == 113 ) {
+          event.preventDefault();
+          $( "body" ).toggleClass( "mini" )
+       }
+      console.log( event.which );
+    });
+  
+    $("#code_input").focus();
     $( "#searchForm" ).submit(function( event ) {
 
     event.preventDefault();
