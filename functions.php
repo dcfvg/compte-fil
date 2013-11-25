@@ -25,7 +25,9 @@ function gen_contact($sets_path, $id_cache_path, $set_id, $start){
       'codetype' => "code128",
       'human_version' => false
     );
-  
+    
+    copy($file,dirname($file)."/_sd/$ids[$id_file]_".basename($file));
+    
     $html .= '
     <p style="background-image:url('.$file.')">
       <img class="code" src="barcode.php?'.http_build_query($param).'" >
