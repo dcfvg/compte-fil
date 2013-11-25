@@ -89,7 +89,7 @@
 	}
 
 	// Pad the edges of the barcode
-	$code_length = 20;
+	$code_length = 30;
 	for ( $i=1; $i <= strlen($code_string); $i++ )
 		$code_length = $code_length + (integer)(substr($code_string,($i-1),1));
 
