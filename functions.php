@@ -2,6 +2,7 @@
 
 $GLOBALS['id_cache_path'] = "/assets/id_cache.txt";
 $GLOBALS['sets_path'] = "/assets/sets/";
+date_default_timezone_set('Europe/Paris');
 
 # file read and export
 function list_files($path){
