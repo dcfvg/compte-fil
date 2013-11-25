@@ -1,4 +1,8 @@
 <?php 
+
+$GLOBALS['id_cache_path'] = "/assets/id_cache.txt";
+$GLOBALS['sets_path'] = "/assets/sets/";
+
 # file read and export
 function list_files($path){
   
@@ -9,20 +13,25 @@ function list_files($path){
 
   return $f_sets;
 }
-function gen_contact($f_sets,$set){ 
+function gen_contact($sets_path, $id_cache_path, $set_id, $start){
   
-  // create contact sheet html of a specific image set
-
-  $imgs = glob($f_sets[$set]."/*.*");
-  $code_type = "code128";        // codebar type ( symbologies )
-   
-  foreach ($f_sets[$set] as $id_img => $img) {
-    $code  = $id_img+1; //str_pad( $id_img, 2, "0", STR_PAD_LEFT); // barcode 
+  $f_sets =  list_files($sets_path);
+  $ids = unserialize(file_get_contents($id_cache_path));
+  //$ids = gen_unique_ids(1);
+  
+  foreach ($f_sets[$set_id] as $id_file => $file) {  
+    $param = array(
+      'code' => "$ids[$id_file]",
+      'codetype' => "code128",
+      'human_version' => false
+    );
+  
     $html .= '
-    <p style="background-image:url('.$img.')">
-      <img class="code" src="barcode.php?text='.$code.'&codetype='.$code_type.'" alt="">
+    <p style="background-image:url('.$file.')">
+      <img class="code" src="barcode.php?'.http_build_query($param).'" >
     </p>';
   }
+  
   return $html;
 }
 
@@ -82,7 +91,9 @@ function cartesian($input) {
     return $result;
 }
 function gen_unique_ids($lenght){
+  
   ini_set('memory_limit', '-1');
+  set_time_limit(600);
   $chars = array_merge(range('A', 'Z'), range('a', 'z'), range(0,9));
   
   foreach (range(0,$lenght) as $key => $value) $input[$value] = $chars;
@@ -92,8 +103,9 @@ function gen_unique_ids($lenght){
    asort($results[$key]);
    $results[$key] = implode("",$results[$key]);
   }
-
-  return array_unique($results);
+    
+  $results = array_unique($results);
+  return array_merge($results);
 }
 function get_id($id,$cache_path){
   $ids = unserialize(file_get_contents("assets/id_cache.txt"));
@@ -105,5 +117,4 @@ function str_sort($string){
   sort($stringParts);
   return implode('', $stringParts);
 }
-
 ?>
