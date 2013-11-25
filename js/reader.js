@@ -1,45 +1,5 @@
 $(function() {
   
-  // vars
-  var vid_h=1080,vid_w=1920,
-  $video = $( "#my_camera" ),
-  $form = $( "#searchForm" ),
-  ajax_url = $form.attr( "action" );
-
-  // events
-  $form.submit(function( event ) {
-    event.preventDefault();
-    get_reader_entry();
-    scanmode();
-  });
-  $( "html" ).keypress(function(event) {$("#code_input").focus();});
-  
-  // short cut
-  function shortcut(code){
-        
-    console.log("shortcut :: "+code);
-    
-    switch (code){
-      case "c": toogle_camera();            break;
-      case "s": new_slide(snapshot());      break;
-      case "g": gridMode();                 break;
-      default:console.log("shortcut :: no match");
-    }
-  }
-  
-  // functions
-  function scanmode(){
-    // s field ready
-    $("#code_input").focus();
-    $("#code_input").val('');
-  }
-  function gridMode(){
-    // fs images to tumbnails
-    $( "body" ).toggleClass( "mini" );
-    $( "#my_camera" ).removeClass( "on" );
-    scanmode();
-  }
-  
   // barcode procesing
   function get_reader_entry(){
     
@@ -112,6 +72,30 @@ $(function() {
     context.fillText(get_time(), x, y);
   }
   
+  // user interface
+  function shortcut(code){
+        
+    console.log("shortcut :: "+code);
+    
+    switch (code){
+      case "c": toogle_camera();            break;
+      case "s": new_slide(snapshot());      break;
+      case "g": gridMode();                 break;
+      default:console.log("shortcut :: no match");
+    }
+  }
+  function scanmode(){
+    // s field ready
+    $("#code_input").focus();
+    $("#code_input").val('');
+  }
+  function gridMode(){
+    // fs images to tumbnails
+    $( "body" ).toggleClass( "mini" );
+    $( "#my_camera" ).removeClass( "on" );
+    scanmode();
+  }
+  
   // utils
   function get_time(){
     var date=new Date();
@@ -128,6 +112,21 @@ $(function() {
     // init_camera();
     scanmode();
   }
+  
+  // vars
+  var vid_h=1080,vid_w=1920,
+  $video = $( "#my_camera" ),
+  $form = $( "#searchForm" ),
+  ajax_url = $form.attr( "action" );
+  
+  // events
+  $form.submit(function( event ) {
+    event.preventDefault();
+    get_reader_entry();
+    scanmode();
+  });
+  $( "html" ).keypress(function(event) {$("#code_input").focus();});
+  
   
   init();
 })
