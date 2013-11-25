@@ -29,7 +29,7 @@ function gen_contact($sets_path, $id_cache_path, $set_id, $start){
     copy($file,dirname($file)."/_sd/$ids[$id_file]_".basename($file));
     
     $html .= '
-    <p style="background-image:url('.$file.')">
+    <p style="background-image:url('.dirname($file).'/_tmb/'.basename($file).')">
       <img class="code" src="barcode.php?'.http_build_query($param).'" >
     </p>';
   }
