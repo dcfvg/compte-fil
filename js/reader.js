@@ -61,8 +61,17 @@ $(function() {
 		
 		context.drawImage(video, 0, 0, vid_w, vid_h);
     show_clock(context);
-		    
-		return canvas.toDataURL('image/jpeg', 1.0 );
+	  
+	  var stamp = Math.round((new Date()).getTime() / 1000);
+	  var path = "snap/"+stamp+".jpg";
+	  
+	  $.ajax({
+	    type: "POST",
+	    url: "call.php", 
+      data: {imgBase64: canvas.toDataURL('image/jpeg', 1.0 ), path:path}
+    }).done(function(image) {
+       new_slide(image);
+    });
 	}
   function show_clock(context,x,y){
     var x = typeof x !== 'undefined' ? x : '100';
@@ -80,7 +89,7 @@ $(function() {
     
     switch (code.toLowerCase()){
       case "c": toogle_camera();            break;
-      case "s": new_slide(snapshot());      break;
+      case "s": snapshot();                 break;
       case "g": gridMode();                 break;
       case "h": stackMode();                break;
       

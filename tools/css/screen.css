@@ -3,7 +3,7 @@
   padding: 0;
 }
 body p {
-  width: 150px;
+  width: 130px;
   float: left;
   height: 150px;
   text-align: center;
@@ -15,7 +15,7 @@ body p .pic {
   width: 100%;
 }
 body p .code {
-  margin-top: 120px;
+  margin-top: 122px;
   padding: 0 8px 0 8px;
   background: white;
 }

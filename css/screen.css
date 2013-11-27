@@ -1,6 +1,36 @@
+/*
+ * www.g-u-i.net
+ */
+.clear-after:after {
+  clear: both;
+  content: '';
+  display: block;
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0px;
+}
 * {
   margin: 0;
   padding: 0;
+}
+body #result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+}
+body #result li {
+  width: 100%;
+  height: 100%;
+  float: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
 }
 body.mini {
   padding: 10%;
@@ -8,7 +38,6 @@ body.mini {
 body.mini #result li {
   width: 20%;
   height: 33.333%;
-  float: left;
   list-style: decimal;
   text-align: center;
 }
@@ -20,22 +49,6 @@ body.stack #result li {
   position: absolute;
   top: 15%;
   left: 15%;
-}
-body #result {
-  position: absolute;
-  top: 0;
-  left: 0;
-  list-style: none;
-  width: 100%;
-  height: 100%;
-}
-body #result li {
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  text-align: center;
 }
 body #my_camera {
   display: none;
