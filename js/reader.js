@@ -17,10 +17,12 @@ $(function() {
       new_slide(data); // TODO : return only data the create slide
     });
   }
-  function new_slide(content,type){
+  function new_slide(content,css_id){
+    css_id = css_id || t();
+    
     if(content != "") {
       $( "#my_camera" ).removeClass( "on" );
-      $( "#result" ).prepend('<li class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');      
+      $( "#result" ).prepend('<li id="'+css_id+'" class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');      
     }
   }
     
@@ -62,16 +64,20 @@ $(function() {
 		context.drawImage(video, 0, 0, vid_w, vid_h);
     show_clock(context);
 	  
-	  var stamp = Math.round((new Date()).getTime() / 1000);
+	  var stamp = t();
 	  var path = "snap/"+stamp+".jpg";
+	  var data = canvas.toDataURL('image/jpeg', 1.0 );
+	  
+	  new_slide(data, stamp);
 	  
 	  $.ajax({
 	    type: "POST",
 	    url: "call.php", 
       data: {imgBase64: canvas.toDataURL('image/jpeg', 1.0 ), path:path}
     }).done(function(image) {
-       new_slide(image);
+       $("#"+stamp).css( "background-image", "url("+image+")" );
     });
+    return canvas.toDataURL('image/jpeg', 1.0 );
 	}
   function show_clock(context,x,y){
     var x = typeof x !== 'undefined' ? x : '100';
@@ -128,6 +134,9 @@ $(function() {
   function get_time(){
     var date=new Date();
 		return str_pad(date.getHours(),2)+":"+str_pad(date.getMinutes(),2)+":"+str_pad(date.getSeconds(),2);
+  }
+  function t(){
+    return new Date().getTime();
   }
   function str_pad(n, p, c) {
     var pad_char = typeof c !== 'undefined' ? c : '0';
