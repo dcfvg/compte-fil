@@ -11,7 +11,7 @@ $(function() {
      
   }
   function get_file(code){
-    var file, posting = $.post(ajax_url, { code: code } );
+    var posting = $.post(ajax_url, { code: code } );
     
     posting.done(function( data ) {
       new_slide(data); // TODO : return only data the create slide
