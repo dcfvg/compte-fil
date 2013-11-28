@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="css/screen.css">
   </head>
   <body>
-  	  	
-
     <ol id="result" reversed="reversed"></ol>
     
     <video id="my_camera" autoplay="autoplay"></video>

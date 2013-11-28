@@ -62,6 +62,9 @@ body #my_camera {
 body #my_camera.on {
   display: block;
 }
+body #my_camera.isight {
+  -webkit-transform: rotate(180deg);
+}
 body #searchForm {
   position: absolute;
   top: 0;

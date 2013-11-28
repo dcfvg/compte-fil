@@ -51,6 +51,9 @@ $(function() {
   function toogle_camera(){
     $( "#my_camera" ).toggleClass( "on" );
   }
+  function toogle_camera_180(){
+    $( "#my_camera" ).toggleClass( "isight" );
+  }
   function snapshot(){
 		// take snapshot and get image data
 		
@@ -96,7 +99,9 @@ $(function() {
     
     switch (code.toLowerCase()){
       case "c": toogle_camera();            break;
+      case "r": toogle_camera_180();        break;
       case "s": snapshot();                 break;
+      
       case "g": gridMode();                 break;
       case "h": stackMode();                break;
       
@@ -179,5 +184,4 @@ $(function() {
   $( "html" ).keypress(function(event) {$("#code_input").focus();});
   
   init();
-
 })
