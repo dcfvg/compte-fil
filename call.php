@@ -4,14 +4,12 @@ include 'tools/krumo/class.krumo.php';
 
 $assets =  "assets/";
 
-
 if(isset($_POST["code"])) {
   $code = str_sort($_POST["code"]);
   $fs = glob($assets."sets/*/_sd/$code*");
 
   echo $fs[0];
 }
-
 if(isset($_POST["imgBase64"]) || isset($_POST["path"])){
 
 
@@ -29,5 +27,4 @@ if(isset($_POST["imgBase64"]) || isset($_POST["path"])){
   
   echo $assets.$p;
 }
-
 ?>

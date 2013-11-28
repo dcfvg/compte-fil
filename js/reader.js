@@ -18,13 +18,14 @@ $(function() {
     });
   }
   function new_slide(content,css_id){
-    css_id = css_id || t();
-    
     if(content != "") {
+      css_id = css_id || t();
+      
+      margin_rand = randomInt(-15,15)+'%';    
       $( "#my_camera" ).removeClass( "on" );
-      $( "#result" ).prepend('<li id="'+css_id+'" class="slide" style="background-image:url('+ content +');">'+get_time()+'</li>');      
+      $( "#result" ).prepend('<li id="'+css_id+'" class="slide" rdmargin="'+margin_rand+'" style="z-index:'+($( "#result li" ).length*100)+';background-image:url('+ content +');">'+get_time()+'</li>')
     }
-  }
+  } 
     
   // video captures
   function init_camera(){
@@ -117,7 +118,10 @@ $(function() {
     $( "body" ).toggleClass( "stack" );
     $( "#my_camera" ).removeClass( "on" );
     
-    refreshZindex();
+    $("#result li").each(function(n) {
+      $(this).css('margin',$(this).attr("rdmargin"));
+    });
+    
     scanmode();
   }
   
@@ -149,7 +153,9 @@ $(function() {
     a.forEach(function(entry) {get_file(entry);});
    
   }
-
+  function randomInt (min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
   // init
   function init(){
     init_camera();

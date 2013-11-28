@@ -42,13 +42,14 @@ body.mini #result li {
   text-align: center;
 }
 body.stack #result {
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: 50%;
+  -webkit-transform: rotate3d(1, 0, 0.3, 45deg);
 }
 body.stack #result li {
   position: absolute;
-  top: 15%;
-  left: 15%;
+  top: 25%;
+  left: 25%;
 }
 body #my_camera {
   display: none;
