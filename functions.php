@@ -23,10 +23,8 @@ function get_resolutions($path){
 }
 function idFromPath($filename){
   $parts = explode("_",basename($filename));
-  return $parts[0];
+  return $parts[1];
 }
-
-
 function gen_ids($set_name){
   
   $id_start = idFromPath($set_name);
