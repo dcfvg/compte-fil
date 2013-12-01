@@ -16,8 +16,26 @@ $start          = 100;
     <link rel="stylesheet" href="css/screen.css">
   </head>
   <body>
+    <ol id="sets">
+      <?php
+      foreach (glob($sets_path.'/*/') as $set_id => $dir) {
+        echo '<li>
+        <a href="?set_name='.basename($dir).'&refresh=ok">[refresh]</a>
+        <a href="?set_name='.basename($dir).'">[print]</a>
+        '.basename($dir).'
+        </li>';
+      }
+      ?>
+    </ol>
   <div class="sheet">
-    <?php echo gen_contact($sets_path, $id_cache_path, $set_id, $start); ?>
+    <?php
+    if(isset($_GET['set_name'])) {
+        $set_name = $_GET['set_name'];
+     
+        if(isset($_GET['refresh'])) echo gen_ids($set_name, 0, 5000);
+        else echo gen_contact($set_name, 500);
+    }
+    ?>
   </div>
   </body>
 </html>
