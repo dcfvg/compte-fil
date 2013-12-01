@@ -16,7 +16,7 @@ $start          = 100;
     <link rel="stylesheet" href="css/screen.css">
   </head>
   <body>
-    <ol id="sets no-print">
+    <ol id="sets" class="no-print">
       <?php
       foreach (glob($sets_path.'/*/') as $set_id => $dir) {
         echo '<li>
