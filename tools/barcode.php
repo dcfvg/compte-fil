@@ -107,7 +107,7 @@
 	
 	imagefill( $image, 0, 0, $white );
 
-	$location = 10;
+	$location = 16;
 	for ( $position = 1 ; $position <= strlen($code_string); $position++ ) {
 		$cur_size = $location + ( substr($code_string, ($position-1), 1) );
 		if ( strtolower($orientation) == "horizontal" )
