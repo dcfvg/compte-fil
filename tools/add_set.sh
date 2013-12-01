@@ -16,29 +16,27 @@ sourcename=$(basename $sourcepath)
 setspath="/Users/benoit/Scripts/custom/compte-fil/assets/sets"
 setpath=$setspath"/"$sourcename
 timestamp=$(date +"%s")
-resolutions=(5000 1920 500 100 10)
-
-#
+resolutions=(5000 1920 1280 500 100)
 
 mkdir -v $setpath
 
 for res in "${resolutions[@]}"
 do
-  pjpg=$setpath"/_jpg-"$res
-  pwww=$setpath"/_www-"$res
+  pjpg=$setpath"/jpg-"$res
+  pwww=$setpath"/www-"$res
   
 	mkdir -v $pjpg
 	mkdir -v $pwww
 	
-	sudo chown -R benoit:_www $pwww
-  chmod -R u=rwX,g=rX,o= $pwww
+	#sudo chown -R benoit:_www $pwww
+  #chmod -R 777 $pwww
 
 	if [[ -n "$prev_res" ]]
-	  then  sourcepath=$setpath"/_jpg-"$prev_res""
+	  then  sourcepath=$prev_path
   fi
   
-	mogrify -format jpg -quality 90 -path $setpath"/_jpg-"$res -resize $resx$res\> "$sourcepath/*.*"
-	prev_res=$res
+	mogrify -format jpg -quality 90 -path $pjpg -resize $resx$res\> "$sourcepath/*.*"
+	prev_path=$pjpg
 
 done
 montage "$pjpg/*.jpg" $setpath"/contact_$res.jpg"
