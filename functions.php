@@ -14,30 +14,61 @@ function list_files($path){
 
   return $f_sets;
 }
-function gen_contact($sets_path, $id_cache_path, $set_id, $start){
+function get_resolutions($path){
+  foreach (glob($path.'/jpg-*/') as $res_folder) {
+   $res[] =  str_replace("jpg-","",basename($res_folder));
+  }
+  // ksort($res, SORT_NATURAL);
+  return $res;
+}
+function idFromPath($filename){
+  $parts = explode("_",basename($filename));
+  return $parts[0];
+}
+
+
+function gen_ids($set_name, $id_start, $id_end){
   
-  $f_sets =  list_files($sets_path);
-  $ids = unserialize(file_get_contents($id_cache_path));
-  //$ids = gen_unique_ids(1);
+  $set_path = $GLOBALS['sets_path'].$set_name;
+  $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
+  $resolutions = get_resolutions($set_path);
   
-  foreach ($f_sets[$set_id] as $id_file => $file) {  
+  foreach (glob($set_path."/jpg-5000/*.jpg") as $id_file => $file) {
+    $code = $ids[$id_file+$id_start];
+    $parent = dirname(dirname($file));
+    
+    foreach ($resolutions as $id => $res) {
+      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.$code.'_'.basename($file));
+    } 
+
+    $console .= '
+    ( '.($id_file+$id_start).' ) '.$code.' -> '.basename($file);
+  }
+  return "<pre>$console</pre>"; 
+}
+function gen_contact($set_name,$res){
+    
+  $set_path = $GLOBALS['sets_path'].$set_name;
+  
+  $elements = glob($set_path.'/www-'.$res.'/*.*');
+
+  foreach ($elements as $id_file => $file) {
+    
     $param = array(
-      'code' => "$ids[$id_file]",
+      'code' => idFromPath($file),
       'codetype' => "code128",
       'human_version' => false
     );
     
-    copy($file,dirname($file)."/_sd/$ids[$id_file]_".basename($file));
-    
+    $parent = dirname(dirname($file));
     $html .= '
-    <p style="background-image:url('.dirname($file).'/_tmb/'.basename($file).')">
+    <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).')">
       <img class="code" src="barcode.php?'.http_build_query($param).'" >
     </p>';
   }
   
   return $html;
 }
-
 ## barcode ID
 function cartesian($input) {
     $result = array();
