@@ -2,13 +2,13 @@ $(function() {
   
   // barcode procesing
   function get_reader_entry(){
-    
     var code = $form.find( "input[name='s']" ).val();
     console.log('scanned code :: '+code);
     
     if(code.length < 2) shortcut(code);
-    else get_file(code);
-     
+    else if(code != prev_code) get_file(code);
+    prev_code = code;
+    console.log(prev_code);
   }
   function get_file(code){
     var posting = $.post(ajax_url, { code: code } );
@@ -169,7 +169,7 @@ $(function() {
   }
   
   // vars
-  var vid_h=1080,vid_w=1920,
+  var vid_h=1080,vid_w=1920,prev_code,
   $video = $( "#my_camera" ),
   $form = $( "#searchForm" ),
   ajax_url = $form.attr( "action" );
