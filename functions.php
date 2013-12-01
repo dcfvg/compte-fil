@@ -27,18 +27,21 @@ function idFromPath($filename){
 }
 
 
-function gen_ids($set_name, $id_start, $id_end){
+function gen_ids($set_name){
   
+  $id_start = idFromPath($set_name);
   $set_path = $GLOBALS['sets_path'].$set_name;
   $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
   $resolutions = get_resolutions($set_path);
+  
+  array_map('unlink', glob($set_path."/www-*/*.jpg"));
   
   foreach (glob($set_path."/jpg-5000/*.jpg") as $id_file => $file) {
     $code = $ids[$id_file+$id_start];
     $parent = dirname(dirname($file));
     
     foreach ($resolutions as $id => $res) {
-      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.$code.'_'.basename($file));
+      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.$id_file.'_'.$code.'_'.basename($file));
     } 
 
     $console .= '
@@ -47,22 +50,26 @@ function gen_ids($set_name, $id_start, $id_end){
   return "<pre>$console</pre>"; 
 }
 function gen_contact($set_name,$res){
-    
   $set_path = $GLOBALS['sets_path'].$set_name;
-  
   $elements = glob($set_path.'/www-'.$res.'/*.*');
 
   foreach ($elements as $id_file => $file) {
     
     $param = array(
-      'code' => idFromPath($file),
+      'code' => idFromPath(idFromPath($file)),
       'codetype' => "code128",
-      'human_version' => false
+      'orientation' => "vertical",
+      'human_version' => false,
+      'size' => "15"
     );
     
     $parent = dirname(dirname($file));
+    
+    $grey = 100+($id_file%100);
+    $bg = 'background-color:rgb('."$grey,$grey,$grey".');';
+    
     $html .= '
-    <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).')">
+    <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).');'.$bg.'">
       <img class="code" src="barcode.php?'.http_build_query($param).'" >
     </p>';
   }

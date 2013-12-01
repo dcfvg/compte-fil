@@ -3,10 +3,11 @@
   padding: 0;
 }
 body p {
-  width: 130px;
+  width: 140px;
   float: left;
-  height: 150px;
+  height: 140px;
   text-align: center;
+  margin-right: 15px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -15,7 +16,16 @@ body p .pic {
   width: 100%;
 }
 body p .code {
-  margin-top: 122px;
-  padding: 0 8px 0 8px;
+  width: 15px;
   background: white;
+  display: block;
+  position: relative;
+  left: 140px;
+  top: 30px;
+}
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
 }

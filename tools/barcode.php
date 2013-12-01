@@ -124,7 +124,7 @@
   if($human_version){
     imagefilledrectangle($image, 0,$img_width/$margin_coef, $img_width, $img_height, $white);
   }
-  imagestring($image, 1, 10, $size, $text, $black);
+  // imagestring($image, 1, 10, $size, $text, $black);
 
   // Content type
   header('Content-Type: image/gif');
