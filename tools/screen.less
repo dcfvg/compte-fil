@@ -7,35 +7,56 @@
 @imgh:140px;
 
 body {
+background: royalblue;
+height:100%;
+width:100%;
+
   p {
     width:@imgw;
     float:left;
     height:@imgh;
     text-align:center;
     
-    @codew:15px;
+    @codew:20px;
+    @goutiere:20px;
     
     .pic {width:100%;}
     .code {
       width:@codew;
+      height:@imgh - @goutiere;
+      
       background:white;
-  
+
+      
       display:block;
       position:relative;
       left:@imgw;
-      top:30px;
+      top:@goutiere/2;
+      
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position:bottom;
     }
-
     margin-right:@codew;
-    
+    //margin-bottom:@codew;
     background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
   }
 }
+.sheet {
+  width:100%;
+  height:100%;
+  background:linear-gradient(to bottom, royalblue, salmon);
+}
+
 @media print {    
     .no-print, .no-print *
     {
         display: none !important;
     }
+    body {
+    width: 841mm;
+    height: 1189mm;
+  }
 }
