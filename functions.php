@@ -22,7 +22,7 @@ function get_resolutions($path){
   return $res;
 }
 function idFromPath($filename){
-  $parts = explode("_",basename($filename));
+  $parts = explode("_",preg_replace("/\\.[^.\\s]{3,4}$/", "",basename($filename)));
   return $parts[1];
 }
 function gen_ids($set_name){
