@@ -54,21 +54,21 @@ function gen_contact($set_name,$res){
   foreach ($elements as $id_file => $file) {
     
     $param = array(
-      'code' => idFromPath(idFromPath($file)),
+      'code' => idFromPath($file),
       'codetype' => "code128",
       'orientation' => "vertical",
       'human_version' => false,
-      'size' => "15"
+      'size' => "10"
     );
     
     $parent = dirname(dirname($file));
     
-    $grey = 100+($id_file%100);
-    $bg = 'background-color:rgb('."$grey,$grey,$grey".');';
+    // $grey = 100+($id_file%100);
+    // $bg = 'background-color:rgb('."$grey,$grey,$grey".');';
     
     $html .= '
     <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).');'.$bg.'">
-      <img class="code" src="barcode.php?'.http_build_query($param).'" >
+      <span class="code"style="background-image:url(barcode.php?'.http_build_query($param).')"></span>
     </p>';
   }
   
