@@ -39,7 +39,7 @@ function gen_ids($set_name){
     $parent = dirname(dirname($file));
     
     foreach ($resolutions as $id => $res) {
-      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.$id_file.'_'.$code.'_'.basename($file));
+      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.jpg');
     } 
 
     $console .= '
