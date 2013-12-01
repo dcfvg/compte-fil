@@ -140,9 +140,8 @@ function gen_unique_ids($lenght){
   $results = cartesian($input);
   foreach ($results as $key => $result) {
    asort($results[$key]);
-   $results[$key] = implode("",$results[$key]);
+   $results[$key] = str_sort(implode("",$results[$key]));
   }
-    
   $results = array_unique($results);
   return array_merge($results);
 }
