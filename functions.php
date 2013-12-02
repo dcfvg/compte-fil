@@ -25,9 +25,13 @@ function idFromPath($filename){
   $parts = explode("_",preg_replace("/\\.[^.\\s]{3,4}$/", "",basename($filename)));
   return $parts[1];
 }
+function starFromSetName($set_name){
+  $parts = explode("_",preg_replace("/\\.[^.\\s]{3,4}$/", "",basename($set_name)));
+  return $parts[0];
+}
 function gen_ids($set_name){
   
-  $id_start = idFromPath($set_name);
+  $id_start = starFromSetName($set_name);
   $set_path = $GLOBALS['sets_path'].$set_name;
   $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
   $resolutions = get_resolutions($set_path);
@@ -45,7 +49,11 @@ function gen_ids($set_name){
     $console .= '
     ( '.($id_file+$id_start).' ) '.$code.' -> '.basename($file);
   }
-  return "<pre>$console</pre>"; 
+  return "<pre>
+  
+  start : $id_start
+  
+  $console</pre>"; 
 }
 function gen_contact($set_name,$res){
   $set_path = $GLOBALS['sets_path'].$set_name;
