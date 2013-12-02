@@ -7,7 +7,7 @@
 @imgh:140px;
 
 body {
-background: royalblue;
+/*background: royalblue;*/ 
 height:100%;
 width:100%;
 
@@ -47,16 +47,12 @@ width:100%;
 .sheet {
   width:100%;
   height:100%;
-  background:linear-gradient(to bottom, royalblue, salmon);
-}
-
-@media print {    
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }
-    body {
+  //background:linear-gradient(to bottom, royalblue, salmon);
+  }
+@media print {
+  .no-print, .no-print * {display: none !important;}
+  body {
     width: 841mm;
-    height: 1189mm;
+    //height: 1189mm;
   }
 }
