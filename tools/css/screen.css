@@ -3,7 +3,7 @@
   padding: 0;
 }
 body {
-  background: royalblue;
+  /*background: royalblue;*/
   height: 100%;
   width: 100%;
 }
@@ -35,7 +35,6 @@ body p .code {
 .sheet {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #4169e1, #fa8072);
 }
 @media print {
   .no-print,
@@ -44,6 +43,5 @@ body p .code {
   }
   body {
     width: 841mm;
-    height: 1189mm;
   }
 }
