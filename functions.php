@@ -36,9 +36,9 @@ function gen_ids($set_name){
   $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
   $resolutions = get_resolutions($set_path);
   
-  array_map('unlink', glob($set_path."/www-*/*.jpg"));
+  array_map('unlink', glob($set_path."/www-*/*.*"));
   
-  foreach (glob($set_path."/jpg-5000/*.jpg") as $id_file => $file) {
+  foreach (glob($set_path."/jpg-5000/*.*") as $id_file => $file) {
     $code = $ids[$id_file+$id_start];
     $parent = dirname(dirname($file));
     
