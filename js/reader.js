@@ -183,10 +183,8 @@ $(function() {
     return (pad + n).slice(-pad.length);
   }
   function gen_content(){
-    
-    var a = ["AAv", "ABg", "AAE", "AAe", "AAf", "AAF"];
+    var a = ["AAv", "ABg", "AAE", "AAe", "AAf", "AAF","ABv", "AAg", "ABE", "ABe", "ABf", "ABF"];
     a.forEach(function(entry) {get_file(entry);});
-   
   }
   function randomInt (min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
