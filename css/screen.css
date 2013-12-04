@@ -18,8 +18,6 @@ body #result {
   position: absolute;
   top: 0;
   left: 0;
-  text-align: center;
-  list-style: none;
   width: 100%;
   height: 100%;
 }
@@ -27,17 +25,21 @@ body #result li {
   width: 100%;
   height: 100%;
   float: left;
+  list-style-position: inside;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  list-style: decimal;
   text-align: center;
 }
 body #result li span {
-  padding: 10px;
+  position: relative;
+  top: 2px;
+  left: 0px;
+  padding: 2px 4px 2px 4px;
   color: black;
   background: white;
   margin: auto;
-  line-height: 18px;
 }
 body.mini #result {
   /*    margin:2%;
@@ -51,7 +53,7 @@ body.mini #result li {
   text-align: center;
 }
 body.mini .on {
-  background: blue;
+  background: salmon;
 }
 body.stack #result {
   width: 50%;
@@ -70,6 +72,7 @@ body #my_camera {
   left: 0;
   width: 100%;
   height: 100%;
+  background: white;
 }
 body #my_camera.onAir {
   display: block;
