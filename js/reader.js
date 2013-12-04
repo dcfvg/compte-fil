@@ -91,19 +91,20 @@ $(function() {
     context.font = "bold 18px Monaco";
     context.fillText(get_time(), x, y);
   }
-  
+
   // user interface
   function shortcut(code){
-    
     console.log("shortcut :: "+code);
-    
     switch (code.toLowerCase()){
       case "c": toogle_camera();            break;
-      case "r": toogle_camera_180();        break;
+      case "i": toogle_camera_180();        break;
       case "s": snapshot();                 break;
       
       case "g": gridMode();                 break;
       case "h": stackMode();                break;
+      
+      case "p": prevSlide();                break;
+      case "o": nextSlide();                break;
       
       default:console.log("shortcut :: no match");
     }
@@ -118,6 +119,7 @@ $(function() {
     $( "body" ).toggleClass( "mini" );
     $( "#my_camera" ).removeClass( "on" );
     scanmode();
+    gotoSlide();
   }
   function stackMode(){
     $( "body" ).toggleClass( "stack" );
@@ -137,6 +139,32 @@ $(function() {
       
       $(this).css('z-index', 1000-n).css('margin',margin_rand);
     });
+  }
+  function prevSlide(){
+    curSlideId ++;
+    gotoSlide();
+  }
+  function nextSlide(){
+    curSlideId --;
+    gotoSlide();
+  }
+  function gotoSlide(){
+    
+    
+    if(curSlideId > $stack.children().length -1 ) curSlideId = 0;
+    if(curSlideId < 0) curSlideId = $stack.children().length -1;
+    
+    console.log(curSlideId + " / " + $stack.children().length);
+    
+    $curSlide = $stack.find('li:nth-child('+(curSlideId+1)+')');
+    
+    $(".on").removeClass("on");
+    $curSlide.addClass( "on" );
+
+    $("body").scrollTo($curSlide, 200 );
+  }
+  function gotolastSlide(){
+    $("body").scrollTo( $stack.find('li:first-child()'), 600 );
   }
   
   // utils
@@ -169,11 +197,14 @@ $(function() {
   }
   
   // vars
-  var vid_h=1080,vid_w=1920,prev_code,
+  var vid_h=1080,vid_w=1920, 
+  prev_code, curSlideId = 0,
+  $curSlide,
   $video = $( "#my_camera" ),
   $form = $( "#searchForm" ),
+  $stack = $('#result'),
+  $stackSildes = $stack.find('li'),
   ajax_url = $form.attr( "action" );
-  mode="normal"
   
   // events
   $form.submit(function( event ) {
