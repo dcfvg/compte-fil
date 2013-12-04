@@ -12,7 +12,7 @@ $start          = 100;
 <html>
   <head>
     <meta charset="utf-8">
-    <title><?php $_GET['set_name'] ?></title>
+    <title><?php echo $_GET['set_name'] ?></title>
     <link rel="stylesheet" href="css/screen.css">
   </head>
   <body>
