@@ -17,13 +17,19 @@ $(function() {
       new_slide(data); // TODO : return only data the create slide
     });
   }
-  function new_slide(content,css_id){
+  function new_slide(content, css_id){
+    css_id = css_id || t();
+    
+    var margin_rand = 'rdmargin="'+randomInt(-15,15)+'%'+'"',   
+    re = /(?:\.([^.]+))?$/,
+    ext = re.exec(content.toLowerCase())[1];
+    
     if(content != "") {
-      css_id = css_id || t();
-      
-      margin_rand = randomInt(-15,15)+'%';    
       $video.removeClass( "onAir" );
-      $stack.prepend('<li id="'+css_id+'" class="slide" rdmargin="'+margin_rand+'" style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
+      pauseAllVideo();
+      
+      if(ext == "jpg") $stack.prepend('<li id="'+css_id+'" class="slide tjpg" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
+      if(ext == "mov") $stack.prepend('<li id="'+css_id+'" class="slide tmov" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';"><video id="vid'+css_id+'" width="100%" height="100%" class="docvideo" autoplay controls><source src="'+content+'" type="video/mp4"></video></li>');
     }
     gotolastSlide();
   }
@@ -93,7 +99,11 @@ $(function() {
     context.font = "bold 18px Monaco";
     context.fillText(get_time(), x, y);
   }
-
+  function pauseAllVideo(){
+    $('.docvideo').each(function() {
+        $(this).get(0).pause();
+    });
+  }
   // user interface
   function shortcut(code){
     console.log("shortcut :: "+code);
@@ -151,9 +161,7 @@ $(function() {
     curSlideId --;
     gotoSlide();
   }
-  function gotoSlide(){
-    
-    
+  function gotoSlide(){    
     if(curSlideId > $stack.children().length -1 ) curSlideId = 0;
     if(curSlideId < 0) curSlideId = $stack.children().length -1;
     
