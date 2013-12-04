@@ -22,10 +22,11 @@ $(function() {
       css_id = css_id || t();
       
       margin_rand = randomInt(-15,15)+'%';    
-      $( "#my_camera" ).removeClass( "on" );
-      $( "#result" ).prepend('<li id="'+css_id+'" class="slide" rdmargin="'+margin_rand+'" style="z-index:'+($( "#result li" ).length*100)+';background-image:url('+ content +');">'+get_time()+'</li>')
+      $video.removeClass( "onAir" );
+      $stack.prepend('<li id="'+css_id+'" class="slide" rdmargin="'+margin_rand+'" style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
     }
-  } 
+    gotolastSlide();
+  }
     
   // video captures
   function init_camera(){
@@ -49,7 +50,8 @@ $(function() {
 		}
   }
   function toogle_camera(){
-    $( "#my_camera" ).toggleClass( "on" );
+    gotolastSlide();
+    $video.toggleClass( "onAir" );
   }
   function toogle_camera_180(){
     $( "#my_camera" ).toggleClass( "isight" );
@@ -117,13 +119,13 @@ $(function() {
   function gridMode(){
     // fs images to tumbnails
     $( "body" ).toggleClass( "mini" );
-    $( "#my_camera" ).removeClass( "on" );
+    $video.removeClass( "onAir" );
     scanmode();
     gotoSlide();
   }
   function stackMode(){
     $( "body" ).toggleClass( "stack" );
-    $( "#my_camera" ).removeClass( "on" );
+    $video.removeClass( "onAir" );
     
     $("#result li").each(function(n) {
       $(this).css('margin',$(this).attr("rdmargin"));
