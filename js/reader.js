@@ -54,7 +54,7 @@ $(function() {
     $video.toggleClass( "onAir" );
   }
   function toogle_camera_180(){
-    $( "#my_camera" ).toggleClass( "isight" );
+    $video.toggleClass( "isight" );
   }
   function snapshot(){
 		// take snapshot and get image data
@@ -122,20 +122,21 @@ $(function() {
     $video.removeClass( "onAir" );
     scanmode();
     gotoSlide();
+    
   }
   function stackMode(){
     $( "body" ).toggleClass( "stack" );
     $video.removeClass( "onAir" );
     
-    $("#result li").each(function(n) {
+    $stkElmt.each(function(n) {
       $(this).css('margin',$(this).attr("rdmargin"));
     });
     
     scanmode();
   }
-  
+
   function refreshZindex(){
-    $("#result li").each(function(n) {
+    $stackSildes.each(function(n) {
       var pos = 1 + Math.floor(Math.random() * 10);
       margin_rand = pos+'% '+pos+'% '+pos+'% '+pos+'%';
       
