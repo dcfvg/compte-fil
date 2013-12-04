@@ -32,6 +32,16 @@ body p .code {
   background-repeat: no-repeat;
   background-position: bottom;
 }
+#shortcut p {
+  height: 46.666666666666664px;
+  font-size: 18px;
+  padding-right: 50px;
+}
+#shortcut .code {
+  width: 100%;
+  left: 0;
+  top: 0;
+}
 .sheet {
   width: 100%;
   height: 100%;
