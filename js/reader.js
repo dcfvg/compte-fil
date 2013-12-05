@@ -28,8 +28,8 @@ $(function() {
       $video.removeClass( "onAir" );
       pauseAllVideo();
       
-      if(ext == "jpg") $stack.prepend('<li id="'+css_id+'" class="slide tjpg" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
-      if(ext == "mov") $stack.prepend('<li id="'+css_id+'" class="slide tmov" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';"><video id="vid'+css_id+'" width="100%" height="100%" class="docvideo" autoplay controls><source src="'+content+'" type="video/mp4"></video></li>');
+      if(ext != "mov") $stack.prepend('<li id="'+css_id+'" class="slide tjpg" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
+      else $stack.prepend('<li id="'+css_id+'" class="slide tmov" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';"><video id="vid'+css_id+'" width="100%" height="100%" class="docvideo" autoplay controls><source src="'+content+'" type="video/mp4"></video></li>');
     }
     gotolastSlide();
   }
