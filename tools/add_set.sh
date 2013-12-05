@@ -35,7 +35,7 @@ do
 	  detox -vr $sourcepath
   fi
   
-	mogrify -format jpg -quality 90 -path $pjpg -resize $resx$res\> "$sourcepath/*.*"
+	mogrify -background white -flatten -format jpg -quality 90 -path $pjpg -resize $resx$res\> "$sourcepath/*.*"
 	prev_path=$pjpg
 
 done
