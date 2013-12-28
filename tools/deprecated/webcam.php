@@ -2,9 +2,18 @@
 <html lang="en">
   <head>
   </head>
+  <style type="text/css" media="screen">
+  	.isight { 
+		-webkit-transform:rotate(180deg);
+		-webkit-perspective: 500px;
+	}
+  	#my_camera {
+  		width:100%;
+  	}
+  </style>
 <body>
 
-	<video id="my_camera" style="width:1920px; height:1080px;" autoplay="autoplay"></video>
+	<video class="isight" id="my_camera" autoplay="autoplay"></video>
 	
 	<!-- A button for taking snaps -->
 	<form>
