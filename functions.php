@@ -82,6 +82,7 @@ function gen_contact($set_name,$res){
   
   return $html;
 }
+
 ## barcode ID
 function cartesian($input) {
     $result = array();

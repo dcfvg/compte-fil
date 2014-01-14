@@ -27,15 +27,14 @@ $start          = 100;
       }
       ?>
     </ol>
-  <div class="sheet">
-    <?php
-    if(isset($_GET['set_name'])) {
-        $set_name = $_GET['set_name'];
-     
-        if(isset($_GET['refresh'])) echo gen_ids($set_name);
-        else echo gen_contact($set_name, 500);
-    }
-    ?>
-  </div>
+    <div class="sheet">
+      <?php
+        if(isset($_GET['set_name'])) {
+            $set_name = $_GET['set_name'];
+            if(isset($_GET['refresh'])) echo gen_ids($set_name);
+            else echo gen_contact($set_name, 500);
+        }
+      ?>
+    </div>
   </body>
 </html>

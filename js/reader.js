@@ -213,7 +213,7 @@ $(function() {
   $form = $( "#searchForm" ),
   $stack = $('#result'),
   $stackSildes = $stack.find('li'),
-  ajax_url = $form.attr( "action" );
+  ajax_url = $form.attr("action");
   
   // events
   $form.submit(function( event ) {
