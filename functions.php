@@ -44,9 +44,9 @@ function gen_ids($set_name){
     $parent = dirname(dirname($file));
     
     foreach ($resolutions as $id => $res) {
-      if(preg_match('/\bFFimage2\b/', $file)) {
+      if(preg_match('/\bFFimage2\b/', $file) and $res == 1920) {
         $mov_path = "../".$GLOBALS['pre-sets_path'].$set_name."/".str_replace("-FFimage2-1.jpg","",basename($file));
-        if($res == 1920) copy($mov_path,$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.mov');
+        copy($mov_path,$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.mov');
       } else {
          copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.jpg');
       }
