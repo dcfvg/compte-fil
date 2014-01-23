@@ -21,6 +21,16 @@ resolutions=(5000 1920 1280 500 100)
 rm -rf $setpath
 mkdir -v $setpath
 
+rm -f $sourcepath"/*-FFimage2-*"
+for mov in `find $sourcepath -iname "*.mov" -type f`
+do
+  ffmpeg -i "$mov" -t 2 -r 0.5 $sourcepath"/$(basename $mov)-FFimage2-"%d.jpg
+done
+
+mogrify -background white -flatten -format jpg -quality 90 "$sourcepath/*.png"
+mogrify -background white -flatten -format jpg -quality 90 "$sourcepath/*.tiff"
+mogrify -background white -flatten -format jpg -quality 90 "$sourcepath/*.pdf"
+
 for res in "${resolutions[@]}"
 do
   pjpg=$setpath"/jpg-"$res
@@ -35,7 +45,7 @@ do
 	  detox -vr $sourcepath
   fi
   
-	mogrify -background white -flatten -format jpg -quality 90 -path $pjpg -resize $resx$res\> "$sourcepath/*.*"
+	mogrify -background white -flatten -format jpg -quality 90 -path $pjpg -resize $resx$res\> "$sourcepath/*.jpg"
 	prev_path=$pjpg
 
 done
