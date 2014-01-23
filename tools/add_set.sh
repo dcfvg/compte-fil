@@ -53,3 +53,7 @@ montage "$pjpg/*.jpg" $setpath"/contact_$res.jpg"
 
 sudo chown -R _www $setspath
 sudo chmod -R 777 $setspath
+
+url="http://dev.compte-fil.dcfvg.com/tools/gen_print.php?set_name=$sourcename&refresh=ok"
+echo "get $url"
+wget -qO- $url &> /dev/null
