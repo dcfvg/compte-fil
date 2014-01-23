@@ -32,7 +32,6 @@ function starFromSetName($set_name){
   return $parts[0];
 }
 function gen_ids($set_name){
-  
   $id_start = starFromSetName($set_name);
   $set_path = $GLOBALS['sets_path'].$set_name;
   $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
@@ -45,7 +44,12 @@ function gen_ids($set_name){
     $parent = dirname(dirname($file));
     
     foreach ($resolutions as $id => $res) {
-      copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.jpg');
+      if(preg_match('/\bFFimage2\b/', $file)) {
+        $mov_path = "../".$GLOBALS['pre-sets_path'].$set_name."/".str_replace("-FFimage2-1.jpg","",basename($file));
+        if($res == 1920) copy($mov_path,$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.mov');
+      } else {
+         copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.jpg');
+      }
     } 
 
     $console .= '
