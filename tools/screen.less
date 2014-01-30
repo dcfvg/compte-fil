@@ -13,17 +13,15 @@ width:100%;
 
   p {
     width:@imgw;
-    float:left;
     height:@imgh;
-    text-align:center;
     
-    @codew:20px;
+    @codew:30px;
     @goutiere:20px;
     
     .pic {width:100%;}
     .code {
       width:@codew;
-      height:@imgh - @goutiere;
+      height:@imgh;
       
       background:white;
 
@@ -31,7 +29,7 @@ width:100%;
       display:block;
       position:relative;
       left:@imgw;
-      top:@goutiere/2;
+      top:0;
       
       background-size:contain;
       background-repeat:no-repeat;
@@ -43,8 +41,15 @@ width:100%;
     background-size:contain; 
     background-repeat:no-repeat;
     background-position:center;
-    border:4px solid salmon;
+    border:2px solid blue;
+    display:inline-block;
   }
+}
+#sepa {
+  page-break-after:always;
+  width:100%;
+  height:10%;
+  background-color:red;
 }
 #shortcut {
   
