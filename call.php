@@ -6,7 +6,7 @@ $assets =  "assets/";
 
 if(isset($_POST["code"])) {
   $code = str_sort($_POST["code"]);
-  $fs = glob($assets."sets/*/www-1920/*_$code*");
+  $fs = glob($assets."sets/*/www-1920/*_$code.jpg");
 
   echo $fs[0];
 }
