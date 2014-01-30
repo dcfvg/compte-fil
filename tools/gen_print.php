@@ -27,6 +27,7 @@ $start          = 100;
       }
       ?>
     </ol>
+    <h1><?php echo $_GET['set_name'] ?></h1>
     <div class="sheet">
       <?php
         if(isset($_GET['set_name'])) {
