@@ -72,7 +72,7 @@ function gen_contact($set_name,$res){
       'codetype' => "code128",
       'orientation' => "vertical",
       'human_version' => false,
-      'size' => "10"
+      'size' => "15"
     );
     
     $parent = dirname(dirname($file));
@@ -84,6 +84,7 @@ function gen_contact($set_name,$res){
     <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).');'.$bg.'">
       <span class="code"style="background-image:url(barcode.php?'.http_build_query($param).')"></span>
     </p>';
+    //if($id_file % 30 < 1) $html .='<div id="sepa"></div>';
   }
   
   return $html;
