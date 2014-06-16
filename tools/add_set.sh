@@ -16,7 +16,7 @@ sourcename=$(basename $sourcepath)
 setspath="/Users/benoit/Scripts/custom/compte-fil/assets/sets"
 setpath=$setspath"/"$sourcename
 timestamp=$(date +"%s")
-resolutions=(5000 1920 1280 500 100)
+resolutions=(5000 1920 500 100)
 
 rm -rf $setpath
 mkdir -v $setpath
