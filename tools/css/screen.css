@@ -8,29 +8,31 @@ body {
   width: 100%;
 }
 body p {
-  width: 140px;
-  height: 140px;
-  margin-right: 30px;
-  background-size: contain;
+  width: 35mm;
+  height: 25mm;
+  margin: 0;
+  margin-right: 0;
+  margin-bottom: -4px;
+  background: #bce4fa;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  border: 2px solid blue;
+  background-position: right;
   display: inline-block;
 }
 body p .pic {
   width: 100%;
 }
 body p .code {
-  width: 30px;
-  height: 140px;
-  background: white;
-  display: block;
   position: relative;
-  left: 140px;
+  left: 35mm;
   top: 0;
+  width: 5.5mm;
+  height: 25mm;
+  display: block;
+  background: white;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
 }
 #sepa {
   page-break-after: always;
@@ -38,12 +40,18 @@ body p .code {
   height: 10%;
   background-color: red;
 }
+#shortcut {
+  margin-top: 70mm;
+  text-align: center;
+}
 #shortcut p {
-  height: 46.666666666666664px;
+  width: 40mm;
   font-size: 18px;
-  padding-right: 50px;
+  padding-right: 15mm;
+  background: none;
 }
 #shortcut .code {
+  height: 20mm;
   width: 100%;
   left: 0;
   top: 0;

@@ -42,7 +42,7 @@ do
 	mkdir -v $pjpg
 	mkdir -v $pwww
 
-	if [[ -n "$prev_res" ]]
+	if [[ -n "$prev_path" ]]
 	  then   
 	  sourcepath=$prev_path
 	  detox -vr $sourcepath

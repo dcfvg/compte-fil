@@ -3,45 +3,61 @@
   padding:0;
 }
 
-@imgw:140px;
-@imgh:140px;
+// BIG
+@imgw:90mm;
+@imgh:60mm;
+@border:none;
+@codew:10mm;
+
+@marginR:8mm;
+@marginB:-4px;
+
+@bgColor:#bce4fa;
+
+// XS
+@imgw:35mm;
+@imgh:25mm;
+@codew:5.5mm;
+
+@marginR:0;
+
 
 body {
 /*background: royalblue;*/ 
 height:100%;
 width:100%;
 
-  p {
+
+
+p {
     width:@imgw;
     height:@imgh;
-    
-    @codew:30px;
-    @goutiere:20px;
+		margin:0;
     
     .pic {width:100%;}
     .code {
+	    position:relative;
+      left:@imgw;
+      top:0;
+
       width:@codew;
       height:@imgh;
       
-      background:white;
-
-      
       display:block;
-      position:relative;
-      left:@imgw;
-      top:0;
-      
+
+			background:white;
       background-size:contain;
       background-repeat:no-repeat;
-      background-position:bottom;
+      background-position:center;
     }
-    margin-right:@codew;
-    //margin-bottom:@codew;
-    //background-size:cover;
-    background-size:contain; 
+    margin-right:@marginR;
+    margin-bottom:@marginB;
+    
+		background:@bgColor;
+		background-size:cover; 
     background-repeat:no-repeat;
-    background-position:center;
-    border:2px solid blue;
+    background-position:right;
+    
     display:inline-block;
   }
 }
@@ -52,13 +68,18 @@ width:100%;
   background-color:red;
 }
 #shortcut {
-  
+	margin-top:70mm;
+	text-align:center;
+	
   p {
-    height:@imgh/3;
+	  width:40mm;
     font-size:18px;
-    padding-right:50px;
+    padding-right:15mm;
+		background:none;
+
   }
   .code {
+		height:20mm;
     width:100%;
     left:0;
     top:0;
@@ -74,7 +95,6 @@ width:100%;
   .no-print, .no-print * {display: none !important;}
   body {
     width: 297mm;
-    
     //height: 1189mm;
   }
 }

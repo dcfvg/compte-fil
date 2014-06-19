@@ -18,6 +18,9 @@ $start          = 100;
   <body>
     <ol id="sets" class="no-print">
       <?php
+    echo '<li>
+    <a href="?set_name=all">[print]</a> all
+    </li>';
       foreach (glob($sets_path.'/*/') as $set_id => $dir) {
         echo '<li>
         <a href="?set_name='.basename($dir).'&refresh=ok">[refresh]</a>
@@ -35,6 +38,12 @@ $start          = 100;
             if(isset($_GET['refresh'])) echo gen_ids($set_name);
             else echo gen_contact($set_name, 500);
         }
+				if($_GET['set_name'] == "all"){
+					foreach (glob($sets_path.'/*/') as $set_id => $dir) {
+						echo '<h1>'.basename($dir).'</h1>';
+						echo gen_contact(basename($dir), 500);
+		      }
+				}
       ?>
     </div>
   </body>

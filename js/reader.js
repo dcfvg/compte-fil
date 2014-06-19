@@ -15,6 +15,7 @@ $(function() {
     
     posting.done(function( data ) {
       new_slide(data); // TODO : return only data the create slide
+			console.log(data);
     });
   }
   function new_slide(content, css_id){
@@ -32,8 +33,7 @@ $(function() {
       else $stack.prepend('<li id="'+css_id+'" class="slide tmov" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';"><video id="vid'+css_id+'" width="100%" height="100%" class="docvideo" autoplay controls><source src="'+content+'" type="video/mp4"></video></li>');
     }
     gotolastSlide();
-  }
-    
+  }    
   // video captures
   function init_camera(){
 
@@ -189,6 +189,8 @@ $(function() {
   }
   function gotolastSlide(){
     $("body").scrollTo( $stack.find('li:first-child()'), 600 );
+		curSlideId = 0;
+		gotoSlide();
   }
   
   // utils

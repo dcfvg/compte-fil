@@ -72,7 +72,7 @@ function gen_contact($set_name,$res){
       'codetype' => "code128",
       'orientation' => "vertical",
       'human_version' => false,
-      'size' => "15"
+      'size' => "25"
     );
     
     $parent = dirname(dirname($file));

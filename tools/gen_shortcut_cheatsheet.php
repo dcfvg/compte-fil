@@ -24,7 +24,7 @@ include "../functions.php";
             'code' => $key,
             'codetype' => "code128",
             'human_version' => false,
-            'size' => "55"
+            'size' => "20"
           );
           echo '
           <p>
