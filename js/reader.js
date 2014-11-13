@@ -71,6 +71,7 @@ $(function() {
   function toogle_camera(){
     gotolastSlide();
     $video.toggleClass( "onAir" );
+    $stack.toggleClass( "onAir" );
   }
   function toogle_camera_180(){
     $video.toggleClass( "isight" );

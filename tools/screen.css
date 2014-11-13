@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /*background: royalblue;*/
+  height: 100%;
+  width: 100%;
+}
+body p {
+  width: 35mm;
+  height: 25mm;
+  margin: 0;
+  margin-right: 0;
+  margin-bottom: -4px;
+  background: #bce4fa;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+  display: inline-block;
+}
+body p .pic {
+  width: 100%;
+}
+body p .code {
+  position: relative;
+  left: 35mm;
+  top: 0;
+  width: 5.5mm;
+  height: 25mm;
+  display: block;
+  background: white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#sepa {
+  page-break-after: always;
+  width: 100%;
+  height: 10%;
+  background-color: red;
+}
+#shortcut {
+  margin-top: 70mm;
+  text-align: center;
+}
+#shortcut p {
+  width: 40mm;
+  font-size: 18px;
+  padding-right: 15mm;
+  background: none;
+}
+#shortcut .code {
+  height: 20mm;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.sheet {
+  width: 100%;
+  height: 100%;
+}
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+  body {
+    width: 297mm;
+  }
+}
