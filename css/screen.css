@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+body {
+  font-family: 'myriad pro';
+}
 body #result {
   position: absolute;
   top: 0;
@@ -26,10 +29,8 @@ body #result li span {
   left: 0px;
   padding: 2px 4px 2px 4px;
   margin: auto;
-  font-family: 'myriad pro';
   color: black;
   background: white;
-  font-size: 24px;
 }
 body #result.onAir {
   display: none;

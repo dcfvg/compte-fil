@@ -27,6 +27,8 @@ $(function() {
     
     if(content != "") {
       $video.removeClass( "onAir" );
+      $stack.removeClass( "onAir" );
+      
       pauseAllVideo();
       
       if(ext != "mov") $stack.prepend('<li id="'+css_id+'" class="slide tjpg" '+margin_rand+' style="z-index:'+($stackSildes.length*100)+';background-image:url('+ content +');"><span>'+get_time()+'</span></li>')
@@ -217,7 +219,7 @@ $(function() {
   // init
   function init(){
     init_camera();
-    gen_content();
+    //gen_content();
     scanmode();
   }
   
