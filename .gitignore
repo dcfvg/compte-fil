@@ -32,3 +32,4 @@ krumo/
 /js/jquery.hotkeys
 
 codekit-config.json
+.DS_Store
