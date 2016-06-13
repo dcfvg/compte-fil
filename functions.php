@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $GLOBALS['id_cache_path'] = "/assets/id_cache.txt";
 $GLOBALS['sets_path'] = "/assets/sets/";
@@ -8,9 +8,9 @@ date_default_timezone_set('Europe/Paris');
 
 # file read and export
 function list_files($path){
-  
-  // construct sets and files array 
-  
+
+  // construct sets and files array
+
   $f_sets = glob($path."*");
   foreach ($f_sets as $id_set => $f_set) $f_sets[$id_set] = glob($f_set."/*.*");
 
@@ -36,13 +36,14 @@ function gen_ids($set_name){
   $set_path = $GLOBALS['sets_path'].$set_name;
   $ids = unserialize(file_get_contents($GLOBALS['id_cache_path']));
   $resolutions = get_resolutions($set_path);
-  
+  $console = "";
+
   array_map('unlink', glob($set_path."/www-*/*.*"));
-  
+
   foreach (glob($set_path."/jpg-5000/*.*") as $id_file => $file) {
     $code = $ids[$id_file+$id_start];
     $parent = dirname(dirname($file));
-    
+
     foreach ($resolutions as $id => $res) {
       if(preg_match('/\bFFimage2\b/', $file) and $res == 1920) {
         $mov_path = "../".$GLOBALS['pre-sets_path'].$set_name."/".str_replace("-FFimage2-1.jpg","",basename($file));
@@ -50,23 +51,23 @@ function gen_ids($set_name){
       } else {
          copy($parent.'/jpg-'.$res.'/'.basename($file),$parent.'/www-'.$res.'/'.str_pad($id_file, 5, "0", STR_PAD_LEFT).'_'.$code.'.jpg');
       }
-    } 
+    }
 
     $console .= '
     ( '.($id_file+$id_start).' ) '.$code.' -> '.basename($file);
   }
   return "<pre>
-  
+
   start : $id_start
-  
-  $console</pre>"; 
+
+  $console</pre>";
 }
 function gen_contact($set_name,$res){
   $set_path = $GLOBALS['sets_path'].$set_name;
   $elements = glob($set_path.'/www-'.$res.'/*.*');
-
+  $html = "";
   foreach ($elements as $id_file => $file) {
-    
+
     $param = array(
       'code' => idFromPath($file),
       'codetype' => "code128",
@@ -74,19 +75,19 @@ function gen_contact($set_name,$res){
       'human_version' => false,
       'size' => "25"
     );
-    
+
     $parent = dirname(dirname($file));
-    
-    // $grey = 100+($id_file%100);
-    // $bg = 'background-color:rgb('."$grey,$grey,$grey".');';
-    
+
+    $grey = 100+($id_file%100);
+    $bg = 'background-color:rgb('."$grey,$grey,$grey".');';
+
     $html .= '
     <p style="background-image:url('.$parent.'/www-'.$res.'/'.basename($file).');'.$bg.'">
       <span class="code"style="background-image:url(barcode.php?'.http_build_query($param).')"></span>
     </p>';
     //if($id_file % 30 < 1) $html .='<div id="sepa"></div>';
   }
-  
+
   return $html;
 }
 
@@ -146,13 +147,13 @@ function cartesian($input) {
     return $result;
 }
 function gen_unique_ids($lenght){
-  
+
   ini_set('memory_limit', '-1');
   set_time_limit(600);
   $chars = array_merge(range('A', 'Z'), range('a', 'z'), range(0,9));
-  
+
   foreach (range(0,$lenght) as $key => $value) $input[$value] = $chars;
-    
+
   $results = cartesian($input);
   foreach ($results as $key => $result) {
    asort($results[$key]);

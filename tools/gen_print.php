@@ -39,6 +39,7 @@ $start          = 100;
             else echo gen_contact($set_name, 500);
         }
 				if($_GET['set_name'] == "all"){
+          echo $sets_path;
 					foreach (glob($sets_path.'/*/') as $set_id => $dir) {
 						echo '<h1>'.basename($dir).'</h1>';
 						echo gen_contact(basename($dir), 500);
